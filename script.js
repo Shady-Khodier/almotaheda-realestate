@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>📍 المقر الرئيسي: التجمع السكني الإداري - مصر</p>
             <p>📞 الخط الساخن: ${settings.phone}</p>
             <p>💬 واتساب المبيعات: ${settings.whatsapp}</p>
-            <p>✉️ البريد الإلكتروني: sales@almotaheda-realestate.com</p>
+            //✉️ البريد الإلكتروني: sales@almotaheda-realestate.com</p>
         `;
     }
 
