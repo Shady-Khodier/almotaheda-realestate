@@ -1,0 +1,637 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0b0f17;
+    color: #f3f4f6;
+    line-height: 1.7;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 15, 23, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Brand Logo Styling */
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-logo h2 {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.brand-logo span {
+    color: #d4af37;
+}
+
+.logo-sub {
+    font-size: 10px;
+    color: #9ca3af;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: #d4af37;
+}
+
+.cta-btn, .btn-gold {
+    background: linear-gradient(135deg, #d4af37, #aa820a);
+    color: #0b0f17;
+    padding: 10px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    transition: transform 0.2s;
+}
+
+.cta-btn:hover, .btn-gold:hover {
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-wrapper {
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-bg-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.bg-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.bg-slide.active {
+    opacity: 1;
+}
+
+.hero-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(11,15,23,0.4), rgba(11,15,23,0.95));
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.badge {
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 44px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+    color: #d4af37;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #9ca3af;
+    margin-bottom: 35px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-outline {
+    border: 2px solid rgba(212, 175, 55, 0.6);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* About Section */
+.about-section {
+    padding: 90px 8%;
+    background: #111622;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-size: 34px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    color: #9ca3af;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.f-item {
+    font-size: 16px;
+    color: #e5e7eb;
+    font-weight: 600;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 90px 8%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #9ca3af;
+    font-size: 16px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: #141b2b;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    text-align: right;
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.project-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.project-body {
+    padding: 22px;
+}
+
+.project-body h3 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.project-body p {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 15px;
+}
+
+.price {
+    color: #d4af37;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.details-btn {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.details-btn:hover {
+    background: #d4af37;
+    color: #0b0f17;
+}
+
+/* Services Section */
+.services-section {
+    padding: 90px 8%;
+    background: #111622;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-box {
+    background: #161f33;
+    padding: 35px 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    text-align: right;
+}
+
+.serv-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.service-box h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.service-box p {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 90px 8%;
+    text-align: center;
+}
+
+.contact-box {
+    background: #141b2b;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 50px 30px;
+    border-radius: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-box h2 {
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.contact-box p {
+    color: #9ca3af;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.contact-info {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #d1d5db;
+    font-size: 15px;
+}
+
+/* Custom In-Site Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: #161f33;
+    padding: 35px 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    border: 1px solid #d4af37;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.modal-box h3 {
+    color: #d4af37;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.modal-box p {
+    color: #d1d5db;
+    font-size: 15px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.modal-close-btn {
+    padding: 10px 35px;
+}
+
+/* Footer */
+.main-footer {
+    background: #080b12;
+    padding: 60px 8% 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-col h3 {
+    color: #d4af37;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.footer-col p {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    color: #6b7280;
+    font-size: 13px;
+}
+/* --- تعديلات الشاشات الصغيرة والموبايل --- */
+/* --- تعديلات احترافية لشاشات الموبايل (Responsive Design) --- */
+@media (max-width: 768px) {
+
+  /* 1. ضبط الهيدر بالكامل */
+  .main-header {
+    flex-direction: column !important;
+    padding: 12px 15px !important;
+    gap: 12px !important;
+    text-align: center;
+  }
+
+  /* 2. ضبط اللوجو */
+  .brand-logo h2 {
+    font-size: 18px !important;
+  }
+
+  .logo-icon {
+    padding: 5px !important;
+  }
+
+  /* 3. ترتيب روابط القائمة بشكل متناسق في صفوف صغيرة */
+  .main-nav ul {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px 14px !important;
+    padding: 0 !important;
+  }
+
+  .main-nav a {
+    font-size: 12px !important;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+
+  /* 4. ضبط زر الـ CTA العلوي */
+  .cta-btn {
+    padding: 8px 18px !important;
+    font-size: 12px !important;
+    width: auto !important;
+  }
+
+  /* 5. ضبط قسم البانر الرئيسي (Hero Section) */
+  .hero-wrapper {
+    height: auto !important;
+    min-height: 80vh;
+    padding: 40px 15px !important;
+  }
+
+  .hero-content h1 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+  }
+
+  .hero-content p {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .hero-btns {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 10px !important;
+  }
+
+  .btn-gold, .btn-outline {
+    width: 100% !important;
+    max-width: 260px;
+    text-align: center;
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+  }
+
+  /* 6. ضبط بقية أجزاء الموقع (عن الشركة والشبكات) */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+  }
+
+  .about-section, .projects-section, .services-section, .contact-section {
+    padding: 45px 5% !important;
+  }
+}
+/* --- زر الواتساب العائم المتحرك على اليمين --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    z-index: 1500;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+}
+
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+}
+
+@keyframes pulse-whatsapp {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}

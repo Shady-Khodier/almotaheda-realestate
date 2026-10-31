@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الشاملة - شركة المتحدة</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .admin-wrapper {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 35px;
+            background: #141b2b;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+        .section-box {
+            background: #0b0f17;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+        }
+        .section-box h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+            text-align: right;
+        }
+        .form-group label {
+            display: block;
+            color: #e5e7eb;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #161f33;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+        .image-input-dual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            margin-bottom: 15px;
+        }
+        @media (max-width: 768px) {
+            .image-input-dual {
+                grid-template-columns: 1fr;
+            }
+        }
+        .projects-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            text-align: right;
+        }
+        .projects-table th, .projects-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        .projects-table th {
+            color: #d4af37;
+        }
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .edit-btn {
+            background: #d4af37;
+            color: #0b0f17;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .edit-btn:hover {
+            background: #aa820a;
+        }
+        .del-btn {
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .del-btn:hover {
+            background: #b91c1c;
+        }
+        .back-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            color: #d4af37;
+        }
+        .save-global-btn {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #0b0f17;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        /* معاينة وإدارة الصور القديمة أثناء التعديل */
+        .preview-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .preview-thumb {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #d4af37;
+        }
+        .preview-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .remove-img-badge {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        <div class="admin-header">
+            <div>
+                <h2>لوحة التحكم الشاملة للمنصة</h2>
+                <p style="color: #9ca3af; font-size: 13px;">تعديل النصوص، صور السلايدر، الاتصالات، وإدارة المشروعات مع خيارات رفع مرنة</p>
+            </div>
+            <a href="index.html" class="back-link" target="_blank">← معاينة الموقع الرئيسي</a>
+        </div>
+
+        <!-- 1. تعديل النصوص وأرقام التواصل -->
+        <div class="section-box">
+            <h3>تعديل النصوص وأرقام التواصل العامة</h3>
+            <div class="form-group">
+                <label>العنوان الرئيسي في الواجهة (Hero Title):</label>
+                <input type="text" id="site-hero-title">
+            </div>
+            <div class="form-group">
+                <label>النص الفرعي للواجهة:</label>
+                <textarea id="site-hero-desc" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>عنوان قسم عن الشركة:</label>
+                <input type="text" id="site-about-title">
+            </div>
+            <div class="form-group">
+                <label>نبذة عن الشركة:</label>
+                <textarea id="site-about-desc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>رقم هاتف التواصل / الخط الساخن:</label>
+                <input type="text" id="site-phone">
+            </div>
+            <div class="form-group">
+                <label>رقم الواتساب (يظهر في الموقع وزر الواتساب العائم):</label>
+                <input type="text" id="site-whatsapp" placeholder="مثال: 201000000000">
+            </div>
+            <button class="save-global-btn" onclick="saveGeneralSettings()">حفظ وتحديث النصوص والاتصالات</button>
+        </div>
+
+       <!-- 2. إدارة صور السلايدر الخلفية للواجهة -->
+        <div class="section-box">
+            <h3>إدارة صور خلفية الواجهة (Hero Slider)</h3>
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">الصور الحالية للسلايدر (يمكنك حذف أي صورة بالضغط على زر الحذف فوقها):</p>
+
+            <!-- قسم معاينة وحذف صور السلايدر الحالية -->
+            <div id="hero-slides-preview" class="preview-box" style="margin-bottom: 20px;"></div>
+
+            <p style="color: #d4af37; font-size: 14px; font-weight: bold; margin-bottom: 10px;">إضافة صور جديدة للسلايدر:</p>
+            <div class="image-input-dual">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>رفع صور جديدة من الجهاز:</label>
+                    <input type="file" id="hero-files-input" accept="image/*" multiple style="padding: 8px;">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>أو روابط صور جديدة مباشرة (URL):</label>
+                    <textarea id="hero-slider-urls" rows="2" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
+                </div>
+            </div>
+            <button class="save-global-btn" onclick="saveHeroSliderImages()">حفظ وإضافة صور السلايدر الجديدة</button>
+        </div>
+
+        <!-- 3. إدارة المشروعات ومعارض الصور -->
+        <div class="section-box">
+            <h3 id="form-section-title">إضافة مشروع (كمبوند) جديد مع معرض الصور</h3>
+            <form id="add-project-form" onsubmit="saveOrUpdateProject(event)">
+                <input type="hidden" id="p-edit-id" value="">
+
+                <div class="form-group">
+                    <label>اسم المشروع:</label>
+                    <input type="text" id="p-title" required placeholder="مثال: كمبوند الجوهرة السكني">
+                </div>
+                <div class="form-group">
+                    <label>وصف المشروع:</label>
+                    <textarea id="p-desc" rows="2" required placeholder="وصف تفصيلي للكمبوند..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>السعر:</label>
+                    <input type="text" id="p-price" required placeholder="تبدأ الأسعار من 4,500,000 ج.م">
+                </div>
+
+                <!-- الصورة الرئيسية -->
+                <label style="color: #d4af37; font-weight: bold; display: block; margin-bottom: 8px;">الصورة الرئيسة للمشروع:</label>
+                <div id="current-main-img-preview" style="margin-bottom: 10px;"></div>
+                <div class="image-input-dual">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>رفع صورة رئيسية جديدة بديلة:</label>
+                        <input type="file" id="p-main-file" accept="image/*" style="padding: 8px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>أو رابط مباشر (URL):</label>
+                        <input type="url" id="p-main-url" placeholder="https://example.com/img.jpg">
+                    </div>
+                </div>
+
+                <!-- معرض الصور الإضافية -->
+                <label style="color: #d4af37; font-weight: bold; display: block; margin-bottom: 8px;">معرض الصور الإضافي (للشقق من الداخل والواجهات):</label>
+                <div id="current-gallery-preview" style="margin-bottom: 10px;"></div>
+                <div class="image-input-dual">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>إضافة صور جديدة للجهاز:</label>
+                        <input type="file" id="p-gallery-files" accept="image/*" multiple style="padding: 8px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>أو روابط متعددة إضافية (افصل بينها بفاصلة `,`):</label>
+                        <textarea id="p-gallery-urls" rows="2" placeholder="url1, url2, url3"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-project-btn" class="btn-gold" style="width: 100%; padding: 12px; margin-top: 10px;">إضافة المشروع ومعرض الصور</button>
+            </form>
+
+            <h4 style="color: #fff; margin-top: 30px; margin-bottom: 15px;">المشروعات الحالية:</h4>
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>اسم المشروع</th>
+                        <th>السعر</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-projects-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات مؤقتة لحفظ حالة الصور أثناء التعديل
+        let editingMainImg = '';
+        let editingGallery = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadGeneralSettings();
+            loadHeroSliderInputs();
+            renderAdminTable();
+        });
+
+        function loadGeneralSettings() {
+            const settings = JSON.parse(localStorage.getItem('almotaheda_settings')) || {
+                heroTitle: 'نبني مستقبل الاستثمار والسكن الفاخر مع المتحدة',
+                heroDesc: 'نبتكر مجتمعات سكنية متكاملة ومشاريع استثمارية واعدة بمواصفات عالمية وأسعار تنافسية.',
+                aboutTitle: 'من نحن؟ شركة المتحدة للتطوير العقاري',
+                aboutDesc: 'نحن شركة رائدة في مجال التطوير العقاري وبناء المجمعات السكنية المتكاملة.',
+                phone: '19888',
+                whatsapp: '201000000000'
+            };
+
+            document.getElementById('site-hero-title').value = settings.heroTitle;
+            document.getElementById('site-hero-desc').value = settings.heroDesc;
+            document.getElementById('site-about-title').value = settings.aboutTitle;
+            document.getElementById('site-about-desc').value = settings.aboutDesc;
+            document.getElementById('site-phone').value = settings.phone;
+            document.getElementById('site-whatsapp').value = settings.whatsapp;
+        }
+
+        function saveGeneralSettings() {
+            const settings = {
+                heroTitle: document.getElementById('site-hero-title').value,
+                heroDesc: document.getElementById('site-hero-desc').value,
+                aboutTitle: document.getElementById('site-about-title').value,
+                aboutDesc: document.getElementById('site-about-desc').value,
+                phone: document.getElementById('site-phone').value,
+                whatsapp: document.getElementById('site-whatsapp').value
+            };
+            localStorage.setItem('almotaheda_settings', JSON.stringify(settings));
+            alert('تم حفظ النصوص والتواصل بنجاح!');
+        }
+
+        // تحميل وعرض صور السلايدر الحالية مع زر الحذف لكل صورة
+        function loadHeroSliderInputs() {
+            const defaultSlides = [
+                'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1400',
+                'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1400',
+                'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=1400',
+                'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1400',
+                'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1400'
+            ];
+            const saved = JSON.parse(localStorage.getItem('almotaheda_hero_slides')) || defaultSlides;
+
+            const previewContainer = document.getElementById('hero-slides-preview');
+            if (saved.length > 0) {
+                let html = '';
+                saved.forEach((imgUrl, index) => {
+                    html += `
+                        <div class="preview-thumb" style="width: 100px; height: 70px;">
+                            <img src="${imgUrl}" alt="Slide ${index + 1}">
+                            <button type="button" class="remove-img-badge" onclick="deleteHeroSlide(${index})" title="حذف هذه الصورة">×</button>
+                        </div>
+                    `;
+                });
+                previewContainer.innerHTML = html;
+            } else {
+                previewContainer.innerHTML = '<p style="color:#9ca3af; font-size:13px;">لا توجد صور حالياً في السلايدر.</p>';
+            }
+        }
+
+        // دالة حذف صورة معينة من السلايدر
+        function deleteHeroSlide(index) {
+            let saved = JSON.parse(localStorage.getItem('almotaheda_hero_slides')) || [];
+            if (confirm('هل أنت متأكد من حذف هذه الصورة من السلايدر؟')) {
+                saved.splice(index, 1);
+                localStorage.setItem('almotaheda_hero_slides', JSON.stringify(saved));
+                loadHeroSliderInputs();
+            }
+        }
+
+        // حفظ وإضافة صور جديدة للسلايدر
+        function saveHeroSliderImages() {
+            const files = document.getElementById('hero-files-input').files;
+            const textUrls = document.getElementById('hero-slider-urls').value;
+
+            let existingSlides = JSON.parse(localStorage.getItem('almotaheda_hero_slides')) || [];
+            let newTextSlides = [];
+
+            if (textUrls.trim().length > 0) {
+                newTextSlides = textUrls.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            }
+
+            if (files.length > 0) {
+                let processedCount = 0;
+                let newFileImages = [];
+
+                Array.from(files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newFileImages[index] = e.target.result;
+                        processedCount++;
+                        if (processedCount === files.length) {
+                            const finalSlides = existingSlides.concat(newTextSlides).concat(newFileImages.filter(img => img));
+                            localStorage.setItem('almotaheda_hero_slides', JSON.stringify(finalSlides));
+                            alert('تم حفظ وإضافة صور السلايدر بنجاح!');
+                            document.getElementById('hero-files-input').value = '';
+                            document.getElementById('hero-slider-urls').value = '';
+                            loadHeroSliderInputs();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                const finalSlides = existingSlides.concat(newTextSlides);
+                localStorage.setItem('almotaheda_hero_slides', JSON.stringify(finalSlides));
+                alert('تم تحديث صور السلايدر الخلفي بنجاح!');
+                document.getElementById('hero-slider-urls').value = '';
+                loadHeroSliderInputs();
+            }
+        }
+
+        function saveHeroSliderImages() {
+            const files = document.getElementById('hero-files-input').files;
+            const textUrls = document.getElementById('hero-slider-urls').value;
+
+            let existingSlides = JSON.parse(localStorage.getItem('almotaheda_hero_slides')) || [];
+            if (textUrls.trim().length > 0) {
+                existingSlides = textUrls.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            }
+
+            if (files.length > 0) {
+                let processedCount = 0;
+                let newFileImages = [];
+
+                Array.from(files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newFileImages[index] = e.target.result;
+                        processedCount++;
+                        if (processedCount === files.length) {
+                            const finalSlides = existingSlides.concat(newFileImages.filter(img => img));
+                            localStorage.setItem('almotaheda_hero_slides', JSON.stringify(finalSlides));
+                            alert('تم حفظ صور السلايدر الخلفي بنجاح!');
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                localStorage.setItem('almotaheda_hero_slides', JSON.stringify(existingSlides));
+                alert('تم تحديث صور السلايدر الخلفي بنجاح!');
+            }
+        }
+
+        const defaultProjects = [
+            { id: 1, title: 'كمبوند ريفيرا السكني', desc: 'مجمع متكامل يضم عمارات سكنية منظمة بتصميمات عصرية ومساحات مريحة للعائلات.', price: 'تبدأ الأسعار من 4,500,000 ج.م', img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600', gallery: [] },
+            { id: 2, title: 'كمبوند النخيل السكني', desc: 'مشروع سكنى هادئ يتألف من عدة عمارات مع تنظيم ممتاز ومداخل راقية.', price: 'تبدأ الأسعار من 5,200,000 ج.م', img: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=600', gallery: [] },
+            { id: 3, title: 'مشروع دار الأمان السكني', desc: 'مجتمع عمراني مصغر يضم عمارات سكنية متجاورة في موقع حيوي يخدم الأسر.', price: 'تبدأ الأسعار من 3,800,000 ج.م', img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=600', gallery: [] }
+        ];
+
+        function getProjects() {
+            const saved = localStorage.getItem('almotaheda_projects');
+            return saved ? JSON.parse(saved) : defaultProjects;
+        }
+
+        function renderAdminTable() {
+            const projects = getProjects();
+            const tbody = document.getElementById('admin-projects-list');
+            tbody.innerHTML = '';
+
+            projects.forEach((proj, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${proj.title}</td>
+                    <td>${proj.price}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="edit-btn" onclick="editProject(${proj.id})">تعديل</button>
+                            <button class="del-btn" onclick="deleteProject(${index})">حذف</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // تعبئة البيانات وصور المعينة عند الضغط على تعديل
+        function editProject(id) {
+            const projects = getProjects();
+            const proj = projects.find(p => p.id == id);
+            if (!proj) return;
+
+            document.getElementById('p-edit-id').value = proj.id;
+            document.getElementById('p-title').value = proj.title;
+            document.getElementById('p-desc').value = proj.desc;
+            document.getElementById('p-price').value = proj.price;
+
+            editingMainImg = proj.img || '';
+            editingGallery = proj.gallery ? [...proj.gallery] : [];
+
+            updateImagesPreviews();
+
+            document.getElementById('form-section-title').textContent = `تعديل المشروع: ${proj.title}`;
+            document.getElementById('submit-project-btn').textContent = 'حفظ تعديلات المشروع';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // عرض معاينة الصور القديمة وإمكانية حذف أي صورة منها
+        function updateImagesPreviews() {
+            const mainPrev = document.getElementById('current-main-img-preview');
+            if (editingMainImg) {
+                mainPrev.innerHTML = `
+                    <label style="font-size:12px; color:#9ca3af;">الصورة الرئيسية الحالية:</label>
+                    <div class="preview-box">
+                        <div class="preview-thumb">
+                            <img src="${editingMainImg}" alt="Main">
+                            <button type="button" class="remove-img-badge" onclick="removeMainImg()" title="حذف الصورة">×</button>
+                        </div>
+                    </div>`;
+            } else {
+                mainPrev.innerHTML = '<p style="font-size:12px; color:#9ca3af;">لا توجد صورة رئيسية حالياً.</p>';
+            }
+
+            const galPrev = document.getElementById('current-gallery-preview');
+            if (editingGallery.length > 0) {
+                let thumbsHTML = `<label style="font-size:12px; color:#9ca3af;">صور المعرض الحالية (يمكنك حذف أي صورة):</label><div class="preview-box">`;
+                editingGallery.forEach((imgUrl, idx) => {
+                    thumbsHTML += `
+                        <div class="preview-thumb">
+                            <img src="${imgUrl}" alt="Gallery">
+                            <button type="button" class="remove-img-badge" onclick="removeGalleryImg(${idx})" title="حذف">×</button>
+                        </div>`;
+                });
+                thumbsHTML += `</div>`;
+                galPrev.innerHTML = thumbsHTML;
+            } else {
+                galPrev.innerHTML = '<p style="font-size:12px; color:#9ca3af;">لا توجد صور إضافية في المعرض.</p>';
+            }
+        }
+
+        function removeMainImg() {
+            editingMainImg = '';
+            updateImagesPreviews();
+        }
+
+        function removeGalleryImg(index) {
+            editingGallery.splice(index, 1);
+            updateImagesPreviews();
+        }
+
+        // حفظ أو تحديث المشروع مع دمج الصور الجديدة والمعدلة
+        function saveOrUpdateProject(e) {
+            e.preventDefault();
+            const editId = document.getElementById('p-edit-id').value;
+            const title = document.getElementById('p-title').value;
+            const desc = document.getElementById('p-desc').value;
+            const price = document.getElementById('p-price').value;
+
+            const mainUrl = document.getElementById('p-main-url').value;
+            const mainFile = document.getElementById('p-main-file').files[0];
+            const galleryUrls = document.getElementById('p-gallery-urls').value;
+            const galleryFiles = document.getElementById('p-gallery-files').files;
+
+            let additionalGalleryUrls = galleryUrls ? galleryUrls.split(',').map(s => s.trim()).filter(s => s.length > 0) : [];
+
+            const finalizeSave = (finalMainImg) => {
+                let projects = getProjects();
+                const combinedGallery = editingGallery.concat(additionalGalleryUrlProcessing(additionalGalleryUrls));
+
+                if (editId) {
+                    const index = projects.findIndex(p => p.id == editId);
+                    if (index !== -1) {
+                        projects[index] = {
+                            id: Number(editId),
+                            title,
+                            desc,
+                            price,
+                            img: finalMainImg || editingMainImg || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600',
+                            gallery: combinedGallery
+                        };
+                        localStorage.setItem('almotaheda_projects', JSON.stringify(projects));
+                        alert('تم تحديث وتعديل المشروع بنجاح!');
+                    }
+                } else {
+                    const newProj = {
+                        id: Date.now(),
+                        title,
+                        desc,
+                        price,
+                        img: finalMainImg || mainUrl || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600',
+                        gallery: editingGallery.concat(additionalGalleryUrls)
+                    };
+                    projects.push(newProj);
+                    localStorage.setItem('almotaheda_projects', JSON.stringify(projects));
+                    alert('تم إضافة المشروع بنجاح!');
+                }
+
+                // إعادة تعيين النموذج
+                document.getElementById('add-project-form').reset();
+                document.getElementById('p-edit-id').value = '';
+                editingMainImg = '';
+                editingGallery = [];
+                document.getElementById('current-main-img-preview').innerHTML = '';
+                document.getElementById('current-gallery-preview').innerHTML = '';
+                document.getElementById('form-section-title').textContent = 'إضافة مشروع (كمبوند) جديد مع معرض الصور';
+                document.getElementById('submit-project-btn').textContent = 'إضافة المشروع ومعرض الصور';
+                renderAdminTable();
+            };
+
+            const processGalleryFiles = (mainImg) => {
+                if (galleryFiles && galleryFiles.length > 0) {
+                    let processed = 0;
+                    let uploadedGallery = [];
+                    Array.from(galleryFiles).forEach((file, idx) => {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            uploadedGallery[idx] = ev.target.result;
+                            processed++;
+                            if (processed === galleryFiles.length) {
+                                editingGallery = editingGallery.concat(uploadedGallery.filter(x => x));
+                                finalizeSave(mainImg);
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                } else {
+                    finalizeSave(mainImg);
+                }
+            };
+
+            // معالجة الرابط أو الملف الرئيسي الجديد
+            if (mainFile) {
+                const reader = new FileReader();
+                reader.onload = (ev) => processGalleryFiles(ev.target.result);
+                reader.readAsDataURL(mainFile);
+            } else if (mainUrl) {
+                processGalleryFiles(mainUrl);
+            } else {
+                processGalleryFiles(editingMainImg);
+            }
+        }
+
+        function additionalGalleryUrlProcessing(urls) {
+            return urls;
+        }
+
+        function deleteProject(index) {
+            if (confirm('هل أنت متأكد من حذف هذا المشروع؟')) {
+                let projects = getProjects();
+                projects.splice(index, 1);
+                localStorage.setItem('almotaheda_projects', JSON.stringify(projects));
+                renderAdminTable();
+            }
+        }
+    </script>
+</body>
+</html>
